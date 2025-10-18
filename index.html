@@ -22,6 +22,23 @@
             background: #ffffff;
             color: #333;
         }
+        body.light-mode .section,
+        body.light-mode .timeline-item,
+        body.light-mode .portfolio-card,
+        body.light-mode .bg-gray-900,
+        body.light-mode footer {
+            background: #ffffff;
+            color: #333;
+        }
+        body.light-mode .bg-gray-800 {
+            background: #f5f7fa;
+        }
+        body.light-mode .text-gray-300 {
+            color: #666;
+        }
+        body.light-mode .star {
+            background: #333;
+        }
         .circle-accent {
             width: 20px;
             height: 20px;
@@ -51,6 +68,7 @@
         .timeline-item {
             position: relative;
             width: 45%;
+            background: #1a1a1a;
         }
         .timeline-item::after {
             content: '';
@@ -142,6 +160,7 @@
         #home {
             position: relative;
             overflow: hidden;
+            padding-top: 80px; /* Adjust to avoid overlap with navbar */
         }
         .star {
             position: absolute;
@@ -159,9 +178,12 @@
         body.light-mode .star {
             background: #333;
         }
+        .section {
+            background: #000000;
+        }
         @media (max-width: 768px) {
             .hero-image {
-                width: 300px;
+                width: 200px; /* Reduced size for mobile */
                 margin: 0 auto;
             }
             .hero-text {
@@ -171,6 +193,78 @@
                 flex-direction: column;
                 align-items: center;
             }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 50%;
+                height: auto;
+                max-height: 300px; /* Adjust to fit navbar options */
+                background-color: #4682B4;
+                flex-direction: column;
+                padding: 1rem;
+                z-index: 10;
+                transition: max-height 0.3s ease;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-item {
+                margin: 0.5rem 0;
+                padding: 0.5rem 1rem;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-item a {
+                color: #e0e0e0;
+                text-decoration: none;
+                width: 100%;
+                display: block;
+            }
+            .nav-item a:hover {
+                background-color: #ff2e63;
+                color: #fff;
+                border-radius: 4px;
+            }
+            .nav-toggle {
+                display: block;
+                margin-left: 1rem;
+            }
+            #home {
+                padding-top: 120px; /* Increased padding to avoid overlap with navbar on mobile */
+            }
+            .hero-content .text-left {
+                width: 100%;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 1.5rem; /* Reduced font size for mobile */
+            }
+            .hero-content .hero-name {
+                font-size: 1.8rem; /* Reduced font size for mobile */
+            }
+            .hero-content p {
+                font-size: 1rem; /* Reduced font size for mobile */
+            }
+            .hero-content .grid h3 {
+                font-size: 1.5rem; /* Reduced font size for mobile */
+            }
+            .hero-content .grid p {
+                font-size: 0.9rem; /* Reduced font size for mobile */
+            }
+        }
+        @media (min-width: 769px) {
+            .nav-toggle {
+                display: none;
+            }
+            .nav-menu {
+                display: flex;
+                align-items: center;
+            }
+            .section {
+                background: inherit;
+            }
         }
     </style>
 </head>
@@ -179,29 +273,35 @@
     <nav class="navbar fixed w-full z-10 py-4" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div class="text-xl font-bold">Hur Abbas Rana</div>
-            <div class="space-x-6 flex items-center">
-                <a href="#home" class="hover:text-red-400 transition-colors">Home</a>
-                <a href="#about" class="hover:text-red-400 transition-colors">About</a>
-                <a href="#services" class="hover:text-red-400 transition-colors">Services</a>
-                <a href="#portfolio" class="hover:text-red-400 transition-colors">Portfolio</a>
-                <a href="#experience" class="hover:text-red-400 transition-colors">Experience</a>
-                <a href="#skills" class="hover:text-red-400 transition-colors">Skills</a>
-                <a href="#contact" class="hover:text-red-400 transition-colors">Contact</a>
-                <a href="https://drive.google.com/file/d/1-pCN2ILvoSYJ3EaIgi-Tl5XrDttyRJHu/view?usp=drive_link" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Download CV</a>
-                <button id="theme-toggle" class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600 transition">
+            <div class="flex items-center">
+                <div class="nav-menu space-x-6 hidden md:flex items-center">
+                    <a href="#home" class="hover:text-red-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-red-400 transition-colors">About</a>
+                    <a href="#services" class="hover:text-red-400 transition-colors">Services</a>
+                    <a href="#portfolio" class="hover:text-red-400 transition-colors">Portfolio</a>
+                    <a href="#experience" class="hover:text-red-400 transition-colors">Experience</a>
+                    <a href="#certifications" class="hover:text-red-400 transition-colors">Certifications</a>
+                    <a href="#skills" class="hover:text-red-400 transition-colors">Skills</a>
+                    <a href="#contact" class="hover:text-red-400 transition-colors">Contact</a>
+                    <a href="https://drive.google.com/file/d/1-pCN2ILvoSYJ3EaIgi-Tl5XrDttyRJHu/view?usp=drive_link" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Download CV</a>
+                </div>
+                <button id="theme-toggle" class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600 transition ml-4">
                     <i class="fas fa-moon"></i>
+                </button>
+                <button id="nav-toggle" class="nav-toggle md:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden py-20">
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden py-20 section">
         <div class="hero-content flex items-center justify-between w-full max-w-7xl px-4 sm:px-6 lg:px-8 fade-in relative z-10">
             <div class="text-left w-1/2">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Welcome to My Portfolio</h1>
+                <h1 class="text-4xl md:text-5xl font-bold text-red-400 mb-4">Welcome to My Portfolio</h1>
                 <h2 class="hero-name">Hur Abbas Rana</h2>
-                <p class="text-xl md:text-2xl mt-4 text-gray-300">Web Developer | Data Analyst | Export Business Professional | Tax Assistant | Social Media Manager</p>
+                <p class="text-xl md:text-2xl mt-4 text-gray-300">Web Developer | Data Analyst | Export Business Professional | Social Media Manager</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
                     <div class="text-center">
                         <h3 class="text-3xl font-bold text-red-400">2</h3>
@@ -230,7 +330,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 relative">
+    <section id="about" class="py-20 relative section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
             <h2 class="text-4xl font-bold text-center mb-10">About Me</h2>
             <div class="flex flex-col md:flex-row items-center gap-8">
@@ -243,14 +343,14 @@
                     </div>
                 </div>
                 <div class="w-full md:w-2/3">
-                    <p class="text-lg mb-4">Analytical and detail-oriented Web Developer & Data Analyst with hands-on experience in HTML, CSS, JavaScript, and MySQL. Adept at transforming business data into actionable insights and designing responsive web applications. Skilled in integrating Power BI dashboards, enhancing decision-making, and optimizing digital marketing performance. Demonstrated expertise in managing export operations, online branding, and tax documentation for corporate efficiency. Passionate about combining technology and business intelligence to drive measurable growth and operational success.</p>
+                    <p class="text-lg mb-4">Analytical and detail-oriented Web Developer & Data Analyst with hands-on experience in HTML, CSS, JavaScript, and MySQL. Adept at transforming business data into actionable insights and designing responsive web applications. Skilled in integrating Power BI dashboards, enhancing decision-making, and optimizing digital marketing performance. Demonstrated expertise in managing export operations and online branding for corporate efficiency. Passionate about combining technology and business intelligence to drive measurable growth and operational success.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-900 relative">
+    <section id="services" class="py-20 bg-gray-900 relative section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
             <h2 class="text-4xl font-bold text-center mb-10">My Services</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -271,15 +371,15 @@
                     <p>Proficient in designing, managing, and optimizing databases using MySQL for efficient data handling.</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-semibold mb-2">Tax Assistant</h3>
-                    <p>Knowledgeable in taxation processes, assisting in tax documentation and compliance.</p>
+                    <h3 class="text-xl font-semibold mb-2">Data Analyst</h3>
+                    <p>Expert in transforming raw data into actionable insights using Power BI and advanced analytics techniques.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 relative" style="background: linear-gradient(135deg, #1e0b3c, #3b1a6b)">
+    <section id="portfolio" class="py-20 relative section" style="background: linear-gradient(135deg, #1e0b3c, #3b1a6b)">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
             <h2 class="text-4xl font-bold text-center mb-10">My Portfolio</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -290,7 +390,7 @@
                     <a href="#" class="text-red-400 hover:underline mt-2 block">View Project</a>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-lg portfolio-card">
-                    <img src="hur-p/SEO.png" alt="Project 2" class="w-full h-100 object-cover rounded">
+                    <img src="hur-p/SEO.png" alt="Project 2" class="w-full h-70 object-cover rounded">
                     <h3 class="text-xl font-semibold mt-4">SEO Campaign</h3>
                     <p class="text-sm mt-2">Performed basic SEO optimization for alshafi-group.com, upgrading the site to improve visibility, enhance user experience, and support the company’s online presence.</p>
                     <a href="#" class="text-red-400 hover:underline mt-2 block">View Project</a>
@@ -307,13 +407,19 @@
                     <p class="text-sm mt-2">Developed a final year project focused on real-time flood prediction using rain sensors, temperature sensors, ultrasonic sensors for water depth, and a Wi-Fi module to send alerts via the Blynk app. The system provides early warnings to mitigate flood damage through sensor-based data collection and analysis.</p>
                     <a href="#" class="text-red-400 hover:underline mt-2 block">View Project</a>
                 </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg portfolio-card">
+                    <img src="hur-p/Dashboard.png" alt="Data Analyst Project" class="w-full h-500 object-cover rounded">
+                    <h3 class="text-xl font-semibold mt-4">Data Analysis Dashboard</h3>
+                    <p class="text-sm mt-2">Created a Power BI dashboard for Alshafi Group Global, showcasing sales and logistics performance with a 44% achievement in 2025 and 70% in 2024, driving strategic business decisions.</p>
+                    <a href="https://drive.google.com/file/d/1N5qZlGftmVyA7_-ja8KLxxE395N288wL/view?usp=drive_link" class="text-red-400 hover:underline mt-2 block">View Project</a>
+                </div>
             </div>
             <a href="#" class="mt-8 inline-block bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">View All</a>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20 bg-gray-900 relative">
+    <section id="experience" class="py-20 bg-gray-900 relative section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
             <h2 class="text-4xl font-bold text-center mb-10">My Experiences</h2>
             <div class="relative timeline">
@@ -323,11 +429,7 @@
                 </div>
                 <div class="timeline-item">
                     <h3 class="text-xl font-semibold">2024</h3>
-                    <p>Social Media Managed at Agriculture Wheel Impex International Pvt. Ltd. / TBZ Group of Fertilizers - Created and executed digital marketing strategies to enhance online visibility and client engagement. Managed multiple social media accounts, increasing interaction rates by 40%. Designed promotional content aligned with business campaigns and product launches.</p>
-                </div>
-                <div class="timeline-item">
-                    <h3 class="text-xl font-semibold">2024 - 2025</h3>
-                    <p>Tax Assistant at TBZ Group of Fertilizer - Assisted in tax preparation, audit support, and documentation management. Ensured compliance with local tax regulations and supported financial reporting. Maintained precise records for company tax returns and internal audits.</p>
+                    <p>Social Media Manager at Agriculture Wheel Impex International Pvt. Ltd. / TBZ Group of Fertilizers - Created and executed digital marketing strategies to enhance online visibility and client engagement. Managed multiple social media accounts, increasing interaction rates by 40%. Designed promotional content aligned with business campaigns and product launches.</p>
                 </div>
                 <div class="timeline-item">
                     <h3 class="text-xl font-semibold">2025</h3>
@@ -341,8 +443,45 @@
         </div>
     </section>
 
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-gray-900 relative section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+            <h2 class="text-4xl font-bold text-center mb-10">Achievements & Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Big Data Foundations - Level 1</h3>
+                    <p>Issued by: IBM</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Data Analytics Job Simulation</h3>
+                    <p>Issued by: Deloitte</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Master ChatGPT</h3>
+                    <p>Issued by: UniAthena</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Basics of Microsoft Power BI</h3>
+                    <p>Issued by: UniAthena</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Data Analysis Using Python</h3>
+                    <p>Issued by: IBM</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Data Fundamentals</h3>
+                    <p>Issued by: IBM</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Artificial Intelligence Fundamentals</h3>
+                    <p>Issued by: IBM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
-    <section id="skills" class="py-20 relative">
+    <section id="skills" class="py-20 relative section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
             <h2 class="text-4xl font-bold text-center mb-10">My Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -371,12 +510,6 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-2">Tax & Financial Reporting, Compliance Management</h3>
-                    <div class="w-full bg-gray-700 rounded-full h-2.5">
-                        <div class="progress-bar w-[85%]"></div>
-                    </div>
-                </div>
-                <div>
                     <h3 class="text-lg font-semibold mb-2">Critical Thinking, Client Communication, Service Mindset</h3>
                     <div class="w-full bg-gray-700 rounded-full h-2.5">
                         <div class="progress-bar w-[95%]"></div>
@@ -387,7 +520,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 relative">
+    <section id="contact" class="py-20 relative section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
@@ -436,7 +569,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-6 bg-gray-900 text-center">
+    <footer class="py-6 bg-gray-900 text-center section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl font-bold mb-4">Let's Say Hi</h2>
             <div class="flex justify-center space-x-4 mb-4">
@@ -484,13 +617,40 @@
             }
         });
 
-        // Theme Toggle
+        // Theme Toggle with Text Disappearance
         const themeToggle = document.getElementById('theme-toggle');
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
-            themeToggle.innerHTML = document.body.classList.contains('light-mode') 
-                ? '<i class="fas fa-sun"></i>' 
-                : '<i class="fas fa-moon"></i>';
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            // Apply theme to all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.background = document.body.classList.contains('light-mode') ? '#ffffff' : '#000000';
+            });
+        });
+
+        // Navbar Toggle for Mobile
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when a nav item is clicked
+        const navItems = document.querySelectorAll('.nav-menu a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                }
+            });
         });
 
         // Star Animation for Home Section
@@ -507,5 +667,4 @@
         setInterval(createStar, 200);
     </script>
 </body>
-
 </html>
